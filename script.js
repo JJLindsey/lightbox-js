@@ -1,29 +1,24 @@
-const container = document.getElementById('container')
-const colors = ['red', 'redorange', 'orange', 'yellow', 'green', 'blue', 'purple' ]
-const squares = 500
+const container = document.getElementById("container");
+const colors = ["#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#0000FF", "#FF00FF"];
+const SQUARES = 500;
 
-for (let i = 0; i < squares.length; i++) {
-    const squares = document.createElement('div')
-    square.classList.add('square')
+const setColor = (square) => {
+    const color = getRandomColor();
+    square.style.background = color;
+    square.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
+};
 
-    square.addEventListner('mouseover', () => setColor(square))
-    square.addEventListner('mouseout', () => removeColor(square))
-    
-    container.appendChild(square)
-    
-}
+const removeColor = (square) => {
+    square.style.background = "#1d1d1d";
+    square.style.boxShadow = "0 0 2px #000";
+};
 
-function setColor(element) {
-    const color = getRandomColor()
-    element.style.background = color
-    element.style.boxShadow = '0 0 2px ${color}, 0 0 10px ${color}'
-}
+const getRandomColor = ()  => colors[Math.floor(Math.random() * colors.length)];
 
-function removeColor(element) {
-    element.style.background = '#1d1d1d'
-    element.style.boxShadow = '#000'
-}
-
-function getRandomColor() {
-    return colros[Math.floor(Math.random() * colors.length)]
+for (let i = 0; i < SQUARES; i++) {
+    const square = document.createElement("div");
+    square.classList.add("square");
+    square.addEventListener("mouseover", () => setColor(square));
+    square.addEventListener("mouseout", () => removeColor(square));
+    container.appendChild(square);  
 }
